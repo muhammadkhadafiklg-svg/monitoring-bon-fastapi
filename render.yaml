@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: monitoring-bon-sementara
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: BON_CSV_URL
+        sync: false
+      - key: ARSIP_IDS
+        sync: false
